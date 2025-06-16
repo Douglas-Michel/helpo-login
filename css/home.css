@@ -1,0 +1,289 @@
+/* Variáveis para facilitar a manutenção */
+:root {
+  --primary-color: #4caf50; /* Verde Helpo */
+  --secondary-color: #ffffff; /* Cinza claro de fundo */
+  --text-color: #333;
+  --light-text-color: #666;
+  --border-color: #ffffff;
+  --button-bg: var(--primary-color);
+  --button-text: white;
+}
+
+/* Reset básico e estilos globais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: #fff; /* Fundo branco da página */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.main-header {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px 0;
+}
+
+.main-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.logo-img {
+  height: 60px; /* ajuste o tamanho conforme necessário */
+  margin-right: 8px;
+}
+
+.main-nav .nav-item {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  margin-left: 12px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  border: none;
+  display: inline-block;
+}
+
+.main-nav .nav-item:hover,
+.main-nav .nav-item.active {
+  background: #249e60;
+  box-shadow: 0 2px 8px #0002;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero-section {
+  background-color: var(--secondary-color); /* Fundo cinza claro */
+  padding: 60px 0;
+  position: relative;
+  overflow: hidden; /* Para garantir que o carrossel não vaze */
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  gap: 40px; /* Espaço entre texto e imagem */
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.hero-text h1 {
+  font-size: 48px;
+  color: var(--text-color);
+  margin-bottom: 20px;
+  line-height: 1.1;
+  color: #2e7d32; /* Cor específica do título na imagem */
+}
+
+.btn-saiba-mais {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-saiba-mais:hover {
+  background-color: #43a047; /* Um pouco mais escuro ao passar o mouse */
+}
+
+.carousel-container {
+  flex: 1.5; /* Ocupa mais espaço que o texto */
+  max-width: 600px; /* Limite de largura para o carrossel */
+  position: relative;
+  border-radius: 8px; /* Borda arredondada para a imagem */
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para o carrossel */
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover; /* Para garantir que a imagem cubra o espaço */
+  flex-shrink: 0; /* Impede que as imagens encolham */
+  border-radius: 8px; /* Borda arredondada para a imagem */
+}
+
+/* Oculta as imagens que não estão ativas inicialmente */
+.carousel-image:not(.active) {
+  display: none;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.2); /* Pequena borda para visibilidade */
+}
+
+.dot.active {
+  background-color: var(--primary-color); /* Ponto ativo com a cor primária */
+  border: 1px solid var(--primary-color);
+}
+
+/* News Section */
+.news-section {
+  padding: 60px 0;
+  background-color: #fff;
+}
+
+.news-title {
+  font-size: 28px;
+  color: var(--text-color);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.news-icon {
+  font-size: 24px;
+  color: var(--primary-color);
+  margin-right: 10px;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.news-card {
+  background-color: #f8f8f8; /* Fundo mais claro para os cards */
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  border-top: 5px solid var(--primary-color); /* Linha verde no topo */
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+}
+
+.news-date {
+  font-size: 14px;
+  color: var(--light-text-color);
+  margin-bottom: 10px;
+}
+
+.news-card h3 {
+  font-size: 20px;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.news-card p {
+  font-size: 16px;
+  color: var(--light-text-color);
+  margin-bottom: 15px;
+}
+
+.read-more {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 15px;
+  transition: color 0.3s ease;
+}
+
+.read-more:hover {
+  color: #43a047;
+}
+
+/* Classe para texto em verde */
+.green {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+/* Responsividade básica */
+@media (max-width: 768px) {
+  .main-header .container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .main-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text h1 {
+    font-size: 38px;
+  }
+
+  .carousel-container {
+    width: 100%;
+    max-width: none;
+  }
+
+  .news-grid {
+    grid-template-columns: 1fr; /* Uma coluna em telas menores */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-text h1 {
+    font-size: 30px;
+  }
+
+  .btn-saiba-mais {
+    padding: 12px 25px;
+    font-size: 16px;
+  }
+}
