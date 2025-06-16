@@ -10,7 +10,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Segoe UI", Arial, sans-serif;
-  background: #fff;
+  background: #ffffff;
   color: #222;
 }
 
@@ -32,7 +32,7 @@ body {
 }
 
 .left {
-  background: #f0f4f6; /* mais contraste */
+  background: #ffffff; /* mais contraste */
 }
 
 
@@ -102,7 +102,7 @@ body {
 }
 
 .right {
-  background: #f0f4f6;
+  background: #ffffff;
 }
 
 .login-form {
@@ -138,7 +138,7 @@ body {
   border: 1px solid #dbe5e5;
   border-radius: 8px;
   font-size: 1rem;
-  background: #f8fafb;
+  background: #ffffff;
   outline: none;
   margin-bottom: 8px;
   color: #222;
@@ -193,7 +193,7 @@ body {
 
 .divider {
   width: 100%;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #ffffff;
   margin: 24px 0 12px 0;
 }
 
