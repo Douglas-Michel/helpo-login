@@ -1,12 +1,21 @@
 function login() {
-  const email = document.getElementById('email').value;
-  const senha = document.getElementById('senha').value;
+  const emailInput = document.getElementById('email').value;
+  const senhaInput = document.getElementById('senha').value;
 
-  if (!email || !senha) {
+  if (!emailInput || !senhaInput) {
     alert('Por favor, preencha todos os campos.');
     return;
   }
 
-  // Simulação de login
-  alert(`Login realizado com:\nEmail: ${email}`);
+  // Recupera os dados do usuário cadastrado do localStorage
+  const registeredEmail = localStorage.getItem('registeredUserEmail');
+  const registeredPassword = localStorage.getItem('registeredUserPassword');
+
+  if (emailInput === registeredEmail && senhaInput === registeredPassword) {
+    alert(`Login bem-sucedido! Bem-vindo(a), ${localStorage.getItem('registeredUserName') || emailInput}!`);
+    // Aqui você pode redirecionar para a página principal do usuário
+    // window.location.href = 'dashboard.html'; 
+  } else {
+    alert('E-mail ou senha inválidos. Verifique suas credenciais.');
+  }
 }

@@ -1,0 +1,318 @@
+/* Reset some default styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #ffffff;
+  color: #222;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  position: relative;
+}
+
+.left,
+.right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left {
+  background: #ffffff; /* mais contraste */
+}
+
+
+.left-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.branding-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+}
+
+.brand-name {
+  font-size: 60px;
+  font-weight: 700;
+  color: #223036;
+  letter-spacing: 1.2px;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.slogan {
+  font-size: 30px;
+  font-weight: 370;
+  color: #222;
+  margin: 0;
+  line-height: 1.15;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.illustration {
+  width: 410px;
+  max-width: 90vw;
+  margin-bottom: 32px;
+  margin-top: 0;
+  display: block;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  width: 100%;
+  margin-top: 18px;
+}
+
+.social-icons img {
+  filter: invert(49%) sepia(35%) saturate(678%) hue-rotate(93deg) brightness(95%) contrast(91%);
+
+}
+
+.right {
+  background: #ffffff;
+}
+
+/* Modificado de .login-form para .register-form */
+.register-form {
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: transparent;
+  padding: 0;
+  justify-content: center;
+}
+
+.register-form h1 { /* Modificado */
+  font-size: 2rem;
+  font-weight: 600;
+  color: #222f3e;
+  margin-bottom: 32px;
+  margin-top: 0;
+  letter-spacing: 0.2px;
+  text-align: left;
+}
+
+.register-form label { /* Modificado */
+  font-size: 1rem;
+  color: #222;
+  margin-bottom: 6px;
+  margin-top: 12px;
+  font-weight: 400;
+}
+
+.register-form input { /* Modificado */
+  padding: 13px 14px;
+  border: 1px solid #dbe5e5;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #ffffff;
+  outline: none;
+  margin-bottom: 8px;
+  color: #222;
+  font-weight: 400;
+  transition: border 0.2s;
+}
+
+.register-form input::placeholder { /* Modificado */
+  color: #b6bfc9;
+  font-weight: 400;
+  opacity: 1;
+}
+
+.register-form input:focus { /* Modificado */
+  border: 1.5px solid #22b672;
+}
+
+.register-form button { /* Modificado */
+  margin-top: 18px;
+  padding: 15px 0;
+  background: #22b672;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(125, 190, 156, 0.07);
+  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-form button:hover { /* Modificado */
+  background: #1e9e62;
+}
+
+/* Modificado de .forgot para .login */
+.login {
+  margin-top: 14px;
+  color: #222; /* Cor mais escura para o texto "Já tem conta?" */
+  text-decoration: none;
+  font-size: 1rem;
+  align-self: flex-start; /* Alinhamento ao início, se necessário */
+  transition: color 0.2s;
+}
+
+.login a { /* O link "Entrar" */
+  color: #22b672;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.login a:hover {
+  color: #5fa87e;
+}
+
+
+.divider {
+  width: 100%;
+  border-top: 1px solid #dbe5e5; /* Cor mais clara para o divider */
+  margin: 24px 0 12px 0;
+}
+
+/* Modificado de .register para .login */
+.login {
+  font-size: 1rem;
+  color: #222;
+  margin-bottom: 18px;
+}
+
+.login a {
+  color: #22b672;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.login a:hover {
+  color: #5fa87e;
+}
+
+.secure {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #22b672;
+  font-size: 1rem;
+  margin-top: 0;
+}
+
+.secure img {
+  width: 22px;
+  height: 22px;
+}
+
+.divider-vertical {
+  width: 1.5px;
+  background: linear-gradient(to bottom, #e0e4e7 10%, #cfd8dc 90%);
+  height: 65%;
+  min-height: 500px;
+  align-self: center;
+  margin: 0 -10vw; /* Espaço ainda menor entre os painéis */
+  border-radius: 2px;
+  opacity: 0.7;
+  box-shadow: 0 0 0.5px lch(85.78% 3.79 233.1);
+  transition: background 0.2s;
+  display: block;
+}
+
+.left-content,
+.register-form { /* Modificado de .login-form para .register-form */
+  /* Reduz a largura máxima para aproximar os blocos */
+  max-width: 340px;
+}
+
+@media (max-width: 1100px) {
+  .container {
+    flex-direction: column;
+  }
+  .left,
+  .right {
+    min-width: unset;
+    width: 100%;
+    padding: 32px 12px 0 12px;
+    align-items: center;
+  }
+  .left-content {
+    align-items: center;
+  }
+  .branding {
+    justify-content: center;
+  }
+  .illustration {
+    width: 260px;
+  }
+  .register-form { /* Modificado */
+    width: 95vw;
+    max-width: 340px;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+  .divider-vertical {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    flex-direction: column;
+  }
+  .left,
+  .right {
+    min-width: unset;
+    width: 100%;
+    padding: 24px 6vw 0 6vw;
+    align-items: center;
+  }
+  .branding {
+    justify-content: center;
+  }
+  .illustration {
+    width: 180px;
+  }
+  .register-form { /* Modificado */
+    width: 98vw;
+    max-width: 340px;
+  }
+}
