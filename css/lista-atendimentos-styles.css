@@ -1,174 +1,174 @@
 /* Reset básico */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #e6f7ed; /* Fundo verde claro para a página */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Alinha o container ao topo, pois a lista pode ser longa */
-    min-height: 100vh;
-    color: #333;
-    padding: 20px; /* Padding geral para a página */
+  font-family: Arial, sans-serif;
+  background-color: #ffffff; /* Fundo verde claro para a página */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinha o container ao topo, pois a lista pode ser longa */
+  min-height: 100vh;
+  color: #333;
+  padding: 20px; /* Padding geral para a página */
 }
 
 .container {
-    background-color: #fff; /* Fundo branco do card principal */
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    max-width: 960px; /* Largura para a lista */
-    width: 95%;
-    padding: 30px;
-    display: flex;
-    flex-direction: column; /* Conteúdo em coluna: cabeçalho, lista, footer */
+  background-color: #fff; /* Fundo branco do card principal */
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 960px; /* Largura para a lista */
+  width: 95%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column; /* Conteúdo em coluna: cabeçalho, lista, footer */
 }
 
 .list-header {
-    text-align: center;
-    margin-bottom: 30px;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .list-header h1 {
-    color: #2e7d32; /* Cor verde para o título */
-    font-size: 2.5em;
+  color: #4caf50; /* Verde padronizado */
+  font-size: 2.5em;
 }
 
 .list-main-content {
-    flex-grow: 1; /* Permite que o conteúdo da lista ocupe o espaço disponível */
-    margin-bottom: 30px;
+  flex-grow: 1; /* Permite que o conteúdo da lista ocupe o espaço disponível */
+  margin-bottom: 30px;
 }
 
 .no-atendimentos {
-    text-align: center;
-    color: #666;
-    font-style: italic;
-    padding: 20px;
-    border: 1px dashed #ccc;
-    border-radius: 5px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 20px;
+  border: 1px dashed #ccc;
+  border-radius: 5px;
 }
 
 .atendimentos-grid {
-    display: grid;
-    /* Define colunas para layout de grid - você pode ajustar conforme preferir */
-    /* Ex: repeat(auto-fill, minmax(300px, 1fr)) para cards responsivos */
-    /* Para uma lista simples, podemos usar flex-direction: column nos itens */
-    gap: 20px; /* Espaçamento entre os itens da lista */
+  display: grid;
+  /* Define colunas para layout de grid - você pode ajustar conforme preferir */
+  /* Ex: repeat(auto-fill, minmax(300px, 1fr)) para cards responsivos */
+  /* Para uma lista simples, podemos usar flex-direction: column nos itens */
+  gap: 20px; /* Espaçamento entre os itens da lista */
 }
 
 .atendimento-item {
-    background-color: #f9f9f9; /* Fundo leve para cada item da lista */
-    border: 1px solid #eee;
-    border-radius: 6px;
-    padding: 15px 20px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+  background-color: #f9f9f9; /* Fundo leve para cada item da lista */
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
 }
 
 .atendimento-info {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .atendimento-info strong {
-    color: #2e7d32; /* Cor verde para os tópicos (negrito) */
-    margin-right: 5px;
+  color: #4caf50; /* Verde padronizado */
+  margin-right: 5px;
 }
 
 .atendimento-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px; /* Espaçamento acima dos botões de ação */
-    justify-content: flex-end; /* Alinha os botões à direita dentro do item */
+  display: flex;
+  gap: 10px;
+  margin-top: 15px; /* Espaçamento acima dos botões de ação */
+  justify-content: flex-end; /* Alinha os botões à direita dentro do item */
 }
 
 .btn-item-action {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.85em;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.85em;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .btn-editar {
-    background-color: #007bff; /* Azul para Editar */
-    color: white;
+  background-color: #007bff; /* Azul para Editar */
+  color: white;
 }
 
 .btn-editar:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 .btn-excluir {
-    background-color: #dc3545; /* Vermelho para Excluir */
-    color: white;
+  background-color: #dc3545; /* Vermelho para Excluir */
+  color: white;
 }
 
 .btn-excluir:hover {
-    background-color: #c82333;
+  background-color: #c82333;
 }
 
 .list-footer-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px; /* Espaçamento entre a lista e os botões de rodapé */
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px; /* Espaçamento entre a lista e os botões de rodapé */
 }
 
 .list-footer-actions button {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn-voltar {
-    background-color: #ccc;
-    color: #555;
+  background-color: #ccc;
+  color: #555;
 }
 
 .btn-voltar:hover {
-    background-color: #b3b3b3;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #b3b3b3;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .btn-cadastrar {
-    background-color: #2e7d32;
-    color: #fff;
+  background-color: #4caf50; /* Verde padronizado */
+  color: #fff;
 }
 
 .btn-cadastrar:hover {
-    background-color: #256b29;
-    box-shadow: 0 2px 8px rgba(46, 125, 50, 0.2);
+  background-color: #388e3c; /* Um tom mais escuro do verde Helpo */
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-    .container {
-        padding: 20px;
-        width: 98%;
-    }
+  .container {
+    padding: 20px;
+    width: 98%;
+  }
 
-    .list-header h1 {
-        font-size: 2em;
-    }
+  .list-header h1 {
+    font-size: 2em;
+  }
 
-    .atendimento-item {
-        padding: 15px;
-    }
+  .atendimento-item {
+    padding: 15px;
+  }
 
-    .list-footer-actions {
-        flex-direction: column;
-        gap: 15px;
-    }
+  .list-footer-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
 
-    .list-footer-actions button {
-        width: 100%;
-    }
+  .list-footer-actions button {
+    width: 100%;
+  }
 }
