@@ -56,68 +56,38 @@ function editarAtendimento(id) {
   window.location.href = `cadastrar-atendimento.html?id=${id}`;
 }
 
+let atendimentoIdParaExcluir = null;
+
 function excluirAtendimento(idParaExcluir) {
-  const idNum = parseInt(idParaExcluir);
+  atendimentoIdParaExcluir = parseInt(idParaExcluir);
+  // Mostra o modal
+  document.getElementById("modalConfirmacao").style.display = "flex";
+}
 
-  if (isNaN(idNum)) {
-    console.error("ID inválido para exclusão:", idParaExcluir);
-    alert("Erro ao excluir: ID do atendimento inválido.");
-    return;
-  }
+// Evento para confirmar exclusão
+document.addEventListener("DOMContentLoaded", () => {
+  const btnConfirmar = document.getElementById("btnConfirmarExcluir");
+  const btnCancelar = document.getElementById("btnCancelarExcluir");
+  const modal = document.getElementById("modalConfirmacao");
 
-  if (
-    confirm(`Tem certeza que deseja excluir o atendimento com ID: ${idNum}?`)
-  ) {
-    let atendimentos = JSON.parse(localStorage.getItem("atendimentos")) || [];
-
-    console.log("-----------------------------------------");
-    console.log("Antes da exclusão:");
-    console.log("Array original:", JSON.stringify(atendimentos));
-    console.log("ID a ser excluído:", idNum);
-
-    const atendimentosAtualizados = atendimentos.filter((atendimento) => {
-      console.log(
-        `Comparando atendimento.id=${
-          atendimento.id
-        } (tipo: ${typeof atendimento.id}) com idNum=${idNum} (tipo: ${typeof idNum})`
+  btnConfirmar.onclick = function () {
+    if (atendimentoIdParaExcluir !== null) {
+      let atendimentos = JSON.parse(localStorage.getItem("atendimentos")) || [];
+      const atendimentosAtualizados = atendimentos.filter(
+        (a) => a.id !== atendimentoIdParaExcluir
       );
-      return atendimento.id !== idNum;
-    });
-
-    if (atendimentos.length === atendimentosAtualizados.length) {
-      console.warn(
-        `Atendimento com ID ${idNum} não encontrado para exclusão. Array não alterado.`
-      );
-      alert(
-        `Atendimento com ID ${idNum} não encontrado. Nenhuma alteração foi feita.`
-      );
-    } else {
-      // *** Esta é a linha que salva no localStorage ***
       localStorage.setItem(
         "atendimentos",
         JSON.stringify(atendimentosAtualizados)
       );
-
-      console.log("Após a exclusão e salvamento:");
-      console.log(
-        "Array atualizado (após filtro):",
-        JSON.stringify(atendimentosAtualizados)
-      );
-      console.log(
-        "localStorage 'atendimentos' agora contém (lido após setItem):",
-        localStorage.getItem("atendimentos")
-      );
-
-      alert(`Atendimento com ID ${idNum} excluído com sucesso.`);
-
-      // Recarrega a página para atualizar a lista
+      modal.style.display = "none";
+      atendimentoIdParaExcluir = null;
       location.reload();
     }
-    // Se o item não foi encontrado e alertou, ainda assim recarrega a lista para garantir consistência
-    // Se a exclusão foi bem-sucedida, já chamamos loadAtendimentosList dentro do setTimeout
-    // então esta linha é redundante/potencialmente problemática se não for ajustada.
-    // Vou remover a chamada externa para evitar duplo carregamento ou problemas de tempo
-    // loadAtendimentosList();
-    console.log("-----------------------------------------");
-  }
-}
+  };
+
+  btnCancelar.onclick = function () {
+    modal.style.display = "none";
+    atendimentoIdParaExcluir = null;
+  };
+});

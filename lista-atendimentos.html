@@ -1,28 +1,59 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Helpo - Lista de Atendimentos</title>
-    <link rel="stylesheet" href="css/lista-atendimentos-styles.css">
-    </head>
-<body>
+    <link rel="stylesheet" href="css/lista-atendimentos-styles.css" />
+  </head>
+  <body>
     <div class="container">
-        <header class="list-header">
-            <h1>Lista de Atendimentos (CRM)</h1>
-        </header>
+      <header class="list-header">
+        <h1>Lista de Atendimentos (CRM)</h1>
+      </header>
 
-        <main class="list-main-content">
-            <div id="atendimentosList" class="atendimentos-grid">
-                <p id="noAtendimentosMessage" class="no-atendimentos">Nenhum atendimento cadastrado ainda.</p>
-            </div>
-        </main>
-
-        <div class="list-footer-actions">
-            <button type="button" class="btn-voltar" onclick="window.location.href='home.html'">Voltar</button>
-            <button type="button" class="btn-cadastrar" onclick="window.location.href='cadastrar-atendimento.html'">Cadastrar Novo Atendimento</button>
+      <main class="list-main-content">
+        <div id="atendimentosList" class="atendimentos-grid">
+          <p id="noAtendimentosMessage" class="no-atendimentos">
+            Nenhum atendimento cadastrado ainda.
+          </p>
         </div>
+      </main>
+
+      <div class="list-footer-actions">
+        <button
+          type="button"
+          class="btn-voltar"
+          onclick="window.location.href='home.html'"
+        >
+          Voltar
+        </button>
+        <button
+          type="button"
+          class="btn-cadastrar"
+          onclick="window.location.href='cadastrar-atendimento.html'"
+        >
+          Cadastrar Novo Atendimento
+        </button>
+      </div>
     </div>
     <script src="js/atendimento-list.js"></script>
-</body>
+
+    <!-- Modal de confirmação -->
+    <div id="modalConfirmacao" class="modal-confirmacao" style="display: none">
+      <div class="modal-content">
+        <div class="modal-icon">!</div>
+        <h2>Você tem certeza?</h2>
+        <p>Não será possível reverter essa ação!</p>
+        <div class="modal-actions">
+          <button id="btnConfirmarExcluir" class="btn-excluir-modal">
+            Sim, apagar!
+          </button>
+          <button id="btnCancelarExcluir" class="btn-cancelar-modal">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
