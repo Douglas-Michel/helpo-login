@@ -232,12 +232,12 @@ body {
   width: 1.5px;
   background: linear-gradient(to bottom, #e0e4e7 10%, #cfd8dc 90%);
   height: 65%;
-  min-height: 160px;
+  min-height: 500px;
   align-self: center;
   margin: 0 -10vw; /* Espaço ainda menor entre os painéis */
   border-radius: 2px;
   opacity: 0.7;
-  box-shadow: 0 0 0.5px #cfd8dc;
+  box-shadow: 0 0 0.5px lch(85.78% 3.79 233.1);
   transition: background 0.2s;
   display: block;
 }
