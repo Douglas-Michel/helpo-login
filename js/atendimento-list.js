@@ -1,28 +1,30 @@
-document.addEventListener('DOMContentLoaded', () => {
-    loadAtendimentosList();
+document.addEventListener("DOMContentLoaded", () => {
+  loadAtendimentosList();
 });
 
 function loadAtendimentosList() {
-    const atendimentos = JSON.parse(localStorage.getItem('atendimentos')) || [];
-    const atendimentosListDiv = document.getElementById('atendimentosList');
-    const noAtendimentosMessage = document.getElementById('noAtendimentosMessage');
+  const atendimentos = JSON.parse(localStorage.getItem("atendimentos")) || [];
+  const atendimentosListDiv = document.getElementById("atendimentosList");
+  const noAtendimentosMessage = document.getElementById(
+    "noAtendimentosMessage"
+  );
 
-    // Limpa a lista existente antes de renderizar
-    atendimentosListDiv.innerHTML = ''; 
+  // Limpa a lista existente antes de renderizar
+  atendimentosListDiv.innerHTML = "";
 
-    if (atendimentos.length === 0) {
-        noAtendimentosMessage.style.display = 'block'; // Mostra a mensagem
-        return;
-    } else {
-        noAtendimentosMessage.style.display = 'none'; // Esconde a mensagem
-    }
+  if (atendimentos.length === 0) {
+    noAtendimentosMessage.style.display = "block";
+    return;
+  } else {
+    noAtendimentosMessage.style.display = "none";
+  }
 
-    atendimentos.forEach(atendimento => {
-        const itemDiv = document.createElement('div');
-        itemDiv.classList.add('atendimento-item');
-        itemDiv.dataset.id = atendimento.id; // Armazena o ID para exclusão/edição
+  atendimentos.forEach((atendimento) => {
+    const itemDiv = document.createElement("div");
+    itemDiv.classList.add("atendimento-item");
+    itemDiv.dataset.id = atendimento.id;
 
-        itemDiv.innerHTML = `
+    itemDiv.innerHTML = `
             <div class="atendimento-info">
                 <strong>ID do Cliente:</strong> ${atendimento.id}
             </div>
@@ -46,22 +48,76 @@ function loadAtendimentosList() {
                 <button class="btn-item-action btn-excluir" onclick="excluirAtendimento(${atendimento.id})">Excluir</button>
             </div>
         `;
-        atendimentosListDiv.appendChild(itemDiv);
-    });
+    atendimentosListDiv.appendChild(itemDiv);
+  });
 }
 
 function editarAtendimento(id) {
-    alert(`Editar atendimento com ID: ${id}. Em um sistema real, você seria redirecionado para o formulário de cadastro preenchido.`);
-    // Em um sistema real, você passaria o ID para a página de cadastro
-    // window.location.href = `cadastrar-atendimento.html?id=${id}`;
+  window.location.href = `cadastrar-atendimento.html?id=${id}`;
 }
 
-function excluirAtendimento(id) {
-    if (confirm(`Tem certeza que deseja excluir o atendimento com ID: ${id}?`)) {
-        let atendimentos = JSON.parse(localStorage.getItem('atendimentos')) || [];
-        atendimentos = atendimentos.filter(atendimento => atendimento.id !== id);
-        localStorage.setItem('atendimentos', JSON.stringify(atendimentos));
-        loadAtendimentosList(); // Recarrega a lista após a exclusão
-        alert(`Atendimento com ID ${id} excluído com sucesso.`);
+function excluirAtendimento(idParaExcluir) {
+  const idNum = parseInt(idParaExcluir);
+
+  if (isNaN(idNum)) {
+    console.error("ID inválido para exclusão:", idParaExcluir);
+    alert("Erro ao excluir: ID do atendimento inválido.");
+    return;
+  }
+
+  if (
+    confirm(`Tem certeza que deseja excluir o atendimento com ID: ${idNum}?`)
+  ) {
+    let atendimentos = JSON.parse(localStorage.getItem("atendimentos")) || [];
+
+    console.log("-----------------------------------------");
+    console.log("Antes da exclusão:");
+    console.log("Array original:", JSON.stringify(atendimentos));
+    console.log("ID a ser excluído:", idNum);
+
+    const atendimentosAtualizados = atendimentos.filter((atendimento) => {
+      console.log(
+        `Comparando atendimento.id=${
+          atendimento.id
+        } (tipo: ${typeof atendimento.id}) com idNum=${idNum} (tipo: ${typeof idNum})`
+      );
+      return atendimento.id !== idNum;
+    });
+
+    if (atendimentos.length === atendimentosAtualizados.length) {
+      console.warn(
+        `Atendimento com ID ${idNum} não encontrado para exclusão. Array não alterado.`
+      );
+      alert(
+        `Atendimento com ID ${idNum} não encontrado. Nenhuma alteração foi feita.`
+      );
+    } else {
+      // *** Esta é a linha que salva no localStorage ***
+      localStorage.setItem(
+        "atendimentos",
+        JSON.stringify(atendimentosAtualizados)
+      );
+
+      console.log("Após a exclusão e salvamento:");
+      console.log(
+        "Array atualizado (após filtro):",
+        JSON.stringify(atendimentosAtualizados)
+      );
+      console.log(
+        "localStorage 'atendimentos' agora contém (lido após setItem):",
+        localStorage.getItem("atendimentos")
+      );
+
+      alert(`Atendimento com ID ${idNum} excluído com sucesso.`);
+
+      // Recarrega a página para atualizar a lista
+      location.reload();
     }
+    // Se o item não foi encontrado e alertou, ainda assim recarrega a lista para garantir consistência
+    // Se a exclusão foi bem-sucedida, já chamamos loadAtendimentosList dentro do setTimeout
+    // então esta linha é redundante/potencialmente problemática se não for ajustada.
+    // Vou remover a chamada externa para evitar duplo carregamento ou problemas de tempo
+    // loadAtendimentosList();
+    console.log("-----------------------------------------");
+  }
 }
