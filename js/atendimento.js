@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  preencherUsuariosSelect();
+  preencherUsuariosSelect(); // Chama a função ao carregar a página
   // Verifica se há um ID na URL para saber se é modo de edição
   const urlParams = new URLSearchParams(window.location.search);
   const atendimentoId = urlParams.get("id");
@@ -32,32 +32,21 @@ function loadAtendimentoForEdit(id) {
   const atendimento = atendimentos.find((a) => a.id === id);
 
   if (atendimento) {
-    // Preenche os campos do formulário
-    document.getElementById("formaAtendimento").value =
-      atendimento.formaAtendimento;
+    document.getElementById("formaAtendimento").value = atendimento.formaAtendimento;
     document.getElementById("usuario").value = atendimento.usuario;
-    document.getElementById("ativo").value = atendimento.ativo;
-    document.getElementById("respostaAtendimento").value =
-      atendimento.respostaAtendimento;
+    document.getElementById("ativo").value = atendimento.ativo; // 'ativo' do atendimento, não do funcionário
+    document.getElementById("respostaAtendimento").value = atendimento.respostaAtendimento;
     document.getElementById("dataRetorno").value = atendimento.dataRetorno;
 
-    // Muda o título da página e do formulário (feedback visual)
     document.title = "Helpo - Editar Atendimento";
-    document.querySelector(".left-section h1").textContent =
-      "Editar Atendimento";
-    document.querySelector(".left-section p").textContent =
-      "Modifique as informações do atendimento existente.";
+    document.querySelector(".left-section h1").textContent = "Editar Atendimento";
+    document.querySelector(".left-section p").textContent = "Modifique as informações do atendimento existente.";
 
-    // Muda o texto do botão de submit e adiciona um atributo para identificar o modo de edição
     const submitButton = document.querySelector(".btn-cadastrar");
     submitButton.textContent = "Salvar Alterações";
-    submitButton.dataset.editingId = id; // Armazena o ID do atendimento sendo editado
+    submitButton.dataset.editingId = id;
   } else {
-    showFormMessage(
-      "atendimentoFormMessage",
-      "Erro: Atendimento não encontrado para edição.",
-      true
-    );
+    showFormMessage("atendimentoFormMessage", "Erro: Atendimento não encontrado para edição.", true);
     setTimeout(() => {
       window.location.href = "lista-atendimentos.html";
     }, 1500);
@@ -72,43 +61,25 @@ function handleCadastrarAtendimento(event) {
   const formaAtendimento = document.getElementById("formaAtendimento").value;
   const usuario = document.getElementById("usuario").value;
   const ativo = document.getElementById("ativo").value;
-  const respostaAtendimento = document
-    .getElementById("respostaAtendimento")
-    .value.trim();
+  const respostaAtendimento = document.getElementById("respostaAtendimento").value.trim();
   const dataRetorno = document.getElementById("dataRetorno").value;
 
   let hasError = false;
 
-  // Validação dos campos
   if (!formaAtendimento) {
-    showFormMessage(
-      "atendimentoFormMessage",
-      "Por favor, selecione uma Forma de Atendimento."
-    );
+    showFormMessage("atendimentoFormMessage", "Por favor, selecione uma Forma de Atendimento.");
     hasError = true;
   } else if (!usuario) {
-    showFormMessage(
-      "atendimentoFormMessage",
-      "Por favor, selecione um Usuário."
-    );
+    showFormMessage("atendimentoFormMessage", "Por favor, selecione um Usuário.");
     hasError = true;
   } else if (!ativo) {
-    showFormMessage(
-      "atendimentoFormMessage",
-      "Por favor, selecione se o atendimento está Ativo."
-    );
+    showFormMessage("atendimentoFormMessage", "Por favor, selecione se o atendimento está Ativo.");
     hasError = true;
   } else if (!respostaAtendimento) {
-    showFormMessage(
-      "atendimentoFormMessage",
-      "Por favor, descreva a Resposta do Atendimento."
-    );
+    showFormMessage("atendimentoFormMessage", "Por favor, descreva a Resposta do Atendimento.");
     hasError = true;
   } else if (!dataRetorno) {
-    showFormMessage(
-      "atendimentoFormMessage",
-      "Por favor, selecione uma Data para Retorno."
-    );
+    showFormMessage("atendimentoFormMessage", "Por favor, selecione uma Data para Retorno.");
     hasError = true;
   }
 
@@ -117,14 +88,11 @@ function handleCadastrarAtendimento(event) {
   }
 
   const submitButton = event.submitter;
-  const editingId = submitButton.dataset.editingId
-    ? parseInt(submitButton.dataset.editingId)
-    : null;
+  const editingId = submitButton.dataset.editingId ? parseInt(submitButton.dataset.editingId) : null;
 
   let atendimentos = JSON.parse(localStorage.getItem("atendimentos")) || [];
 
   if (editingId) {
-    // MODO EDIÇÃO: Atualiza o atendimento existente
     const index = atendimentos.findIndex((a) => a.id === editingId);
     if (index !== -1) {
       atendimentos[index] = {
@@ -136,28 +104,15 @@ function handleCadastrarAtendimento(event) {
         dataRetorno: dataRetorno,
       };
       localStorage.setItem("atendimentos", JSON.stringify(atendimentos));
-      showFormMessage(
-        "atendimentoFormMessage",
-        "Atendimento atualizado com sucesso!",
-        false
-      );
-      // Pequeno delay antes de redirecionar para dar tempo do localStorage salvar
+      showFormMessage("atendimentoFormMessage", "Atendimento atualizado com sucesso!", false);
       setTimeout(() => {
         window.location.href = "lista-atendimentos.html";
       }, 500);
     } else {
-      showFormMessage(
-        "atendimentoFormMessage",
-        "Erro: Atendimento a ser editado não encontrado.",
-        true
-      );
+      showFormMessage("atendimentoFormMessage", "Erro: Atendimento a ser editado não encontrado.", true);
     }
   } else {
-    // MODO CADASTRO: Cria um novo atendimento
-    const nextId =
-      atendimentos.length > 0
-        ? Math.max(...atendimentos.map((a) => a.id)) + 1
-        : 1;
+    const nextId = atendimentos.length > 0 ? Math.max(...atendimentos.map((a) => a.id)) + 1 : 1;
     const novoAtendimento = {
       id: nextId,
       formaAtendimento: formaAtendimento,
@@ -169,18 +124,9 @@ function handleCadastrarAtendimento(event) {
     atendimentos.push(novoAtendimento);
     localStorage.setItem("atendimentos", JSON.stringify(atendimentos));
 
-    showFormMessage(
-      "atendimentoFormMessage",
-      "Atendimento cadastrado com sucesso!",
-      false
-    );
+    showFormMessage("atendimentoFormMessage", "Atendimento cadastrado com sucesso!", false);
 
-    // Limpar o formulário após o cadastro
     event.target.reset();
-    // Opcional: Redirecionar após o cadastro se desejar
-    // setTimeout(() => {
-    //     window.location.href = 'lista-atendimentos.html';
-    // }, 500);
   }
 }
 
@@ -188,16 +134,18 @@ function handleVoltar() {
   window.location.href = "lista-atendimentos.html";
 }
 
+// --- NOVIDADE: Preencher select de usuários ativos ---
 function preencherUsuariosSelect() {
   const selectUsuario = document.getElementById("usuario");
   if (selectUsuario) {
-    const funcionarios =
-      JSON.parse(localStorage.getItem("registeredEmployees")) || [];
-    selectUsuario.innerHTML = '<option value="">Selecione o usuário</option>';
+    const funcionarios = JSON.parse(localStorage.getItem("registeredEmployees")) || [];
+    selectUsuario.innerHTML = '<option value="">Selecione um usuário</option>'; // Opção padrão
+    
+    // Adiciona apenas funcionários que estão 'Sim' no ativo
     funcionarios.forEach((func) => {
-      if (func.nome) {
+      if (func.ativo === "Sim" && func.nome) { // Verifica se está ativo e tem nome
         const opt = document.createElement("option");
-        opt.value = func.nome;
+        opt.value = func.nome; // Usa o nome como valor e texto
         opt.textContent = func.nome;
         selectUsuario.appendChild(opt);
       }

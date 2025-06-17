@@ -1,5 +1,4 @@
 function validarEmail(email) {
-  // Regex simples para validar e-mail
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
@@ -35,14 +34,29 @@ function handleLogin(event) {
     return;
   }
 
-  const registeredEmail = localStorage.getItem("registeredUserEmail");
-  const registeredPassword = localStorage.getItem("registeredUserPassword");
+  // --- NOVIDADE: Buscar o funcionário no array registeredEmployees ---
+  const funcionarios = JSON.parse(localStorage.getItem("registeredEmployees")) || [];
+  const funcionarioEncontrado = funcionarios.find(
+    (f) => f.email === email && f.password === senha
+  );
 
-  if (email === registeredEmail && senha === registeredPassword) {
-    // Seta flag de login
-    localStorage.setItem("isLoggedIn", "true");
-    window.location.href = "home.html";
+  if (funcionarioEncontrado) {
+    if (funcionarioEncontrado.ativo === "Sim") {
+      // Login bem-sucedido e ativo
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("loggedInUserEmail", funcionarioEncontrado.email); // Armazena o e-mail do usuário logado
+      window.location.href = "home.html"; // Redireciona para a home
+    } else {
+      // Funcionário encontrado, mas não está ativo
+      erro = document.createElement("div");
+      erro.id = "erro-login";
+      erro.style.color = "red";
+      erro.style.marginBottom = "10px";
+      erro.textContent = "Sua conta está inativa. Entre em contato com o administrador.";
+      form.insertBefore(erro, btn);
+    }
   } else {
+    // E-mail ou senha não encontrados na lista de funcionários
     erro = document.createElement("div");
     erro.id = "erro-login";
     erro.style.color = "red";

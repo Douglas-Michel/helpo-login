@@ -48,21 +48,33 @@ function handleRegister(event) {
     return;
   }
 
-  // Verifica se já existe cadastro com o mesmo e-mail
-  const registeredEmail = localStorage.getItem("registeredUserEmail");
-  if (registeredEmail && registeredEmail === email) {
+  // Verifica se o e-mail já existe na lista de funcionários
+  let funcionarios = JSON.parse(localStorage.getItem("registeredEmployees")) || [];
+  const emailExists = funcionarios.some(f => f.email === email);
+
+  if (emailExists) {
     erro.textContent = "Já existe um cadastro com este e-mail.";
     form.insertBefore(erro, btn);
     return;
   }
 
-  // Armazenar os dados no localStorage (simulação de cadastro)
-  localStorage.setItem("registeredUserEmail", email);
-  localStorage.setItem("registeredUserPassword", password);
-  localStorage.setItem("registeredUserName", fullName);
+  // Cria um novo funcionário e adiciona à lista
+  const nextId = funcionarios.length > 0 ? Math.max(...funcionarios.map(f => f.id)) + 1 : 1;
+  const novoFuncionario = {
+    id: nextId,
+    nome: fullName,
+    email: email,
+    posicao: "",
+    celular: "",
+    password: password,
+    ativo: "Sim" // ALTERADO: Agora o padrão é "Sim"
+  };
+
+  funcionarios.push(novoFuncionario);
+  localStorage.setItem("registeredEmployees", JSON.stringify(funcionarios));
 
   erro.style.color = "green";
-  erro.textContent = "Cadastro realizado com sucesso! Redirecionando...";
+  erro.textContent = "Conta criada com sucesso! Redirecionando...";
   form.insertBefore(erro, btn);
 
   setTimeout(() => {

@@ -1,20 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Protege a página
-  if (localStorage.getItem("isLoggedIn") !== "true") {
-    window.location.href = "index.html";
+  // --- NOVIDADE: Proteção da página e verificação de status ativo ---
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const loggedInUserEmail = localStorage.getItem("loggedInUserEmail");
+
+  if (isLoggedIn !== "true" || !loggedInUserEmail) {
+    // Se não estiver logado ou não houver e-mail de usuário logado
+    window.location.href = "index.html"; // Redireciona para a página de login
     return;
   }
+
+  // Verificar status "Ativo" do usuário logado periodicamente (a cada 5 segundos)
+  setInterval(() => {
+    const funcionarios = JSON.parse(localStorage.getItem("registeredEmployees")) || [];
+    const currentUser = funcionarios.find(f => f.email === loggedInUserEmail);
+
+    if (!currentUser || currentUser.ativo !== "Sim") {
+      // Se o usuário não for encontrado ou estiver inativo, força o logout
+      alert("Sua sessão foi encerrada porque sua conta não está mais ativa.");
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("loggedInUserEmail");
+      window.location.href = "index.html";
+    }
+  }, 5000); // Verifica a cada 5 segundos (5000 ms)
+
 
   const logoutBtn = document.getElementById("logout-btn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", function (e) {
       e.preventDefault();
-      // Remove só a flag de login
+      // Remove a flag de login e o e-mail do usuário logado
       localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("loggedInUserEmail");
       window.location.href = "index.html";
     });
   }
 
+  // --- Código do carrossel (existente) ---
   const carouselImages = document.querySelectorAll(".carousel-image");
   const carouselDots = document.querySelectorAll(".dot");
   let currentIndex = 0;
@@ -24,9 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
     carouselImages.forEach((img, i) => {
       img.classList.remove("active");
       if (i === index) {
-        img.style.display = "block"; // Mostra a imagem ativa
+        img.style.display = "block";
       } else {
-        img.style.display = "none"; // Esconde as imagens inativas
+        img.style.display = "none";
       }
     });
 
@@ -44,28 +65,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function startCarousel() {
-    slideInterval = setInterval(nextSlide, 5000); // Muda a cada 5 segundos
+    slideInterval = setInterval(nextSlide, 5000);
   }
 
   function stopCarousel() {
     clearInterval(slideInterval);
   }
 
-  // Adiciona evento de clique para os pontos
   carouselDots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
-      stopCarousel(); // Para o carrossel ao clicar
+      stopCarousel();
       currentIndex = index;
       showSlide(currentIndex);
-      startCarousel(); // Reinicia o carrossel
+      startCarousel();
     });
   });
 
-  // Inicia o carrossel quando a página carrega
-  showSlide(currentIndex); // Mostra a primeira imagem imediatamente
+  showSlide(currentIndex);
   startCarousel();
 
-  // Opcional: Pausar carrossel ao passar o mouse sobre ele
   const carouselContainer = document.querySelector(".carousel-container");
   carouselContainer.addEventListener("mouseenter", stopCarousel);
   carouselContainer.addEventListener("mouseleave", startCarousel);
