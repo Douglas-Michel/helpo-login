@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helpo - Gerenciamento de Funcionários</title>
+    <link rel="stylesheet" href="css/funcionarios-styles.css">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header-func"> <div class="branding">
+            </div>
+            <h1>Gerenciamento de Funcionários</h1>
+        </header>
+
+        <main class="list-main-content">
+            <div class="employee-table-wrapper"> <div class="employee-table">
+                    <div class="table-header">
+                        <div class="header-item">ID</div>
+                        <div class="header-item">Posição</div>
+                        <div class="header-item">Nome</div>
+                        <div class="header-item">E-mail</div>
+                        <div class="header-item">Celular</div>
+                        <div class="header-item">Ativo</div>
+                        <div class="header-item">Ações</div>
+                    </div>
+                    <div id="funcionariosTableBody" class="table-body">
+                        </div>
+                </div>
+            </div>
+            <p id="noFuncionariosMessage" class="no-items">Nenhum funcionário cadastrado ainda.</p>
+        </main>
+
+        <div class="list-footer-actions">
+            <button type="button" class="btn-voltar" onclick="window.location.href='home.html'">Voltar</button>
+            <button type="button" class="btn-cadastrar" onclick="window.location.href='cadastrar-funcionario.html'">Cadastrar Novo Usuário</button>
+        </div>
+    </div>
+
+    <div id="deleteModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <img src="assets/img/atencao.png" alt="Atenção!" class="exclamation-icon">
+            </div>
+            <div class="modal-text">
+                <h2>Você tem certeza?</h2>
+                <p>Não será possível reverter essa ação!</p>
+            </div>
+            <div class="modal-buttons">
+                <button id="confirmDeleteBtn" class="modal-button confirm">Sim, apagar!</button>
+                <button id="cancelDeleteBtn" class="modal-button cancel">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/funcionario-list.js"></script>
+</body>
+</html>

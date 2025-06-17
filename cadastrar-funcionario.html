@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helpo - Cadastrar Funcionário</title>
+    <link rel="stylesheet" href="css/funcionarios-styles.css"> <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <section class="left-section">
+            <div class="left-content">
+                <div class="branding-block">
+                    <div class="branding">
+                        <img src="assets/img/logo.png" alt="Helpo Logo" class="logo" />
+                        <span class="brand-name">Helpo</span>
+                    </div>
+                </div>
+                <h1>Cadastrar Funcionário</h1>
+                <p>Preencha os dados do novo funcionário para adicioná-lo ao sistema.</p>
+            </div>
+        </section>
+        <section class="right-section">
+            <form class="funcionario-form" onsubmit="handleFuncionario(event)">
+                <div class="form-group">
+                    <label for="nomeFuncionario">Nome Completo</label>
+                    <input type="text" id="nomeFuncionario" placeholder="Nome do funcionário" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="emailFuncionario">E-mail</label>
+                    <input type="email" id="emailFuncionario" placeholder="E-mail do funcionário" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="posicaoFuncionario">Posição</label>
+                    <input type="text" id="posicaoFuncionario" placeholder="Ex: Atendente, Gerente" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="celularFuncionario">Celular</label>
+                    <input type="tel" id="celularFuncionario" placeholder="Ex: (XX) XXXXX-XXXX">
+                </div>
+
+                <div class="form-group">
+                    <label for="senhaFuncionario">Senha</label>
+                    <input type="password" id="senhaFuncionario" placeholder="Defina uma senha" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmarSenhaFuncionario">Confirmar Senha</label>
+                    <input type="password" id="confirmarSenhaFuncionario" placeholder="Confirme a senha" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ativoFuncionario">Ativo</label>
+                    <select id="ativoFuncionario" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="Sim">Sim</option>
+                        <option value="Nao">Não</option>
+                    </select>
+                </div>
+                
+                <div id="funcionarioFormMessage" class="form-message"></div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-voltar" onclick="window.history.back()">Voltar</button>
+                    <button type="submit" class="btn-cadastrar">Cadastrar</button>
+                </div>
+            </form>
+        </section>
+    </div>
+    <script src="js/funcionario.js"></script> </body>
+</html>
